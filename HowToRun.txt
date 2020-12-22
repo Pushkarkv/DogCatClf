@@ -1,0 +1,45 @@
+#Initialzinng the local GIT.
+    #1 git init
+    #2 git add .
+    #3 git commit -m "Initial commit"
+#Steps to Push your app to Heroku Cloud.
+#Main file name should be 'app.py'.
+#Our flask instance name should be app.
+#Create a new file and name it as 'Procfile' without any extension with below code.
+    web: gunicorn app:app
+    #4 heroku login
+    #5 heroku create
+    #6 git remote -v
+    #7 git push heroku master
+
+#Steps to deploy on AWS Elastic BeanStalk
+#Main file name should be 'application.py'.
+#Our flask instance name should be application.
+# .ebignore are files that we ignore while deployment on cloud.
+#Create a folder and name it as '.ebextensions'.
+#Create a new file inside the folder named 'python.config' with below code.
+    option_settings:
+        "aws:elasticbeanstalk:container:python":
+          WSGIPath:application:application
+
+#Steps to deploy on GCP
+#Main file name should be 'main.py'.
+#Our flask instance name should be application.
+#Create a new file with name 'app.yaml' with below code.
+    runtime: python
+    env: flex
+    entrypoint: guicorn -b :$PORT main:application
+
+    runtime_config:
+      python_version: 3
+
+
+    manual_sacling:
+      instances: 1
+    resources:
+      cpu: 1
+      memory_gb: 0.5
+      disk_size_gb: 10
+
+
+
